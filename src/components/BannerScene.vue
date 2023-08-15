@@ -19,7 +19,7 @@
           </svg>
           Back home
         </a>
-        <button @click="$store.commit('openCostModal')" class="button-secondary br-32 gap-8">
+        <button @click="$store.commit('openCostModal')" class="button-sec br-32 gap-8">
             Real cost of buying an Atella
             <span class="centered br-24">
                 <svg xmlns="http://www.w3.org/2000/svg" height="11.154" viewBox="0 0 5.635 11.154">
@@ -75,39 +75,54 @@ export default {
       const containerHeight = container.offsetHeight;
 
       this.scene = new THREE.Scene();
-      this.camera = new THREE.PerspectiveCamera(40, containerWidth / containerHeight, 1, 5000);
+      this.camera = new THREE.PerspectiveCamera(40, containerWidth / containerHeight, 0.01, 1000);
 
-      this.renderer = new THREE.WebGLRenderer();
+      this.renderer = new THREE.WebGLRenderer({antialias: true});
+      this.renderer.useLegacyLights = false
+      this.renderer.setPixelRatio(window.devicePixelRatio)
       this.renderer.setSize(containerWidth, containerHeight);
       this.renderer.setClearColor(0xF5F3F1);
-
+      this.renderer.toneMapping=Number(THREE.LinearToneMapping)
+    this.renderer.toneMappingExposure = Math.pow(2, 0.9);
       container.appendChild(this.renderer.domElement);
 
       this.camera.position.x = 2;
       this.camera.position.y = 3;
-      this.camera.position.z = this.zoom * 0.5;
+      this.camera.position.z = this.zoom - 9.54 ;
+         
 
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       this.controls.update();
 
-      const directionalLight = new THREE.DirectionalLight(0x999999, 1);
-      directionalLight.position.set(0, 100, 100);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8 * Math.PI);
+      directionalLight.position.set(0.5, 0, 0.866);
       directionalLight.castShadow = true;
-      directionalLight.intensity = 1.5;
+      directionalLight.intensity = 2;
       this.scene.add(directionalLight);
 
-      // Add more lights or elements to the scene if needed
-      let light2 = new THREE.PointLight(0xffffff, 10);
-        light2.position.set(50, 10, 0);
-        light2.intensity = 1.5; 
-        this.scene.add(light2);
+      // // Add more lights or elements to the scene if needed
+      // let light2 = new THREE.PointLight(0xffffff, 10);
+      //   light2.position.set(50, 10, 0);
+      //   light2.intensity = 1.5; 
+      //   this.scene.add(light2);
 
-        let light3 = new THREE.PointLight(0xffffff, 10);
-        light3.position.set(0, 100, -500);
-        light3.intensity = 1.5; 
-        this.scene.add(light3);
-        // this.renderer.setPixelRatio(window.devicePixelRatio);
-        // this.renderer.antialias = true; // Enable anti-aliasing
+      const hemLight= new THREE.HemisphereLight()
+      hemLight.intensity=0.3
+      hemLight.color.set('#ffffff')
+      this.scene.add(hemLight)
+
+
+      const ambLight = new THREE.AmbientLight('#ffffff',0.3)
+      ambLight.intensity=2
+      ambLight.color.set('#ffffff')
+      this.scene.add(ambLight)
+
+        // let light3 = new THREE.PointLight(0xffffff, 10);
+        // light3.position.set(0, 100, -500);
+        // light3.intensity = 1.5; 
+        // this.scene.add(light3);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.antialias = true; // Enable anti-aliasing
     },
     removeModel() {
     if (this.modelLoaded && this.model) {
@@ -127,7 +142,7 @@ export default {
       const loader = new GLTFLoader();
       loader.load(this.filePath, (gltf) => {
         this.model = gltf.scene;
-        this.model.rotation.y = this.rotation / 180 * Math.PI;
+        this.model.rotation.y = this.rotation  * Math.PI;
 
         this.scene.add(this.model);
 
@@ -214,7 +229,19 @@ canvas {
     height: 100%;
     width: 100%;
 }
-
+.button-sec{
+  background-color: rgba(198, 189, 179, 0.19);
+  color: #000;
+  position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    padding: 14px 18px 14px 30px;
+    span{
+      background-color: #fff;
+      padding: 8px 24px;
+    }
+}
 .button-primary{
     inset: 50px auto auto 80px;
     background-color: #fff;

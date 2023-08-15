@@ -38,6 +38,8 @@ export default new Vuex.Store({
       {id: 2, name: 'Roller blinds', filezname: 'rollerblinds', price: 2500, image: require('@/assets/images/houses/roller_blinds.png'), rotation: 150}
     ],
     cost_modal: false,
+    cost_modal2:false,
+    hide_tab:false,
     appointment_modal: false
   },
   mutations: {
@@ -78,6 +80,21 @@ export default new Vuex.Store({
     },
     openCostModal(state) {
       state.cost_modal = true
+      state.hide_tab=false;
+    },
+    noTabModal(state) {
+      state.cost_modal = true
+      state.hide_tab=true;
+
+    },
+    openInfoModal(state) {
+      state.cost_modal2 = true
+      state.hide_tab=false;
+    },
+    noInfoModal(state) {
+      state.cost_modal2 = false
+      state.hide_tab=false;
+
     },
     closeCostModal(state) {
       state.cost_modal = false

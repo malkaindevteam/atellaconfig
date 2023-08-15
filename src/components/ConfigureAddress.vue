@@ -22,20 +22,13 @@
                         <label for="exterior">Exterior deck</label>
                         <div id="exterior" class="flx ai-c gap-8 capitalize"><i class="br-50" :class="configuration.color.name "></i>{{ configuration.color.name }}</div>
                     </div>
+                    
+                </div>
+                <div class="col">
                     <div class="col-row">
                         <label for="exterior">Entry & Blinds</label>
                         <div id="blind">{{ configuration.exterior.name }}</div>
                         <div>{{ configuration.blind.name }}</div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col-row">
-                        <label for="solor">Solor type</label>
-                        <div id="solor">{{ configuration.appliance.name }}</div>
-                    </div>
-                    <div class="col-row mb-16">
-                        <label for="sewage">Sewage option</label>
-                        <div id="sewage">{{ configuration.sewage.name }}</div>
                     </div>
                 </div>
             </div>

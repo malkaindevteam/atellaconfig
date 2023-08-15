@@ -27,6 +27,11 @@ body{
 .gray-2 {
     color: #4c4c4c;
 }
+.blue-2 {
+    color: #0071E3;
+    cursor: pointer;
+    text-decoration: underline;
+}
 .bg-white {
     background-color: #fff;
 }
@@ -132,6 +137,7 @@ button, .a-button {
 
 .br-50 {
     border-radius: 50%;
+    padding: 5px;
 }
 
 .w-100{

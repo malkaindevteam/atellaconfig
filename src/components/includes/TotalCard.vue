@@ -6,7 +6,7 @@
                     <div class="fs-105rem">${{ computePrice(computedTotal+installation) }}</div>
                     <div v-if="!computedTotal == 0" class="flx gap-8">
                         <span class="gray">or</span>
-                        <div class="gray-2">${{ computePrice((computedTotal+installation)/12) }}/Mon</div>
+                        <div  @click="$store.commit('noTabModal');" class="blue-2">${{ computePrice((computedTotal+installation)/12) }}/Mo +</div>
                     </div>
                 </div>
                 <div class="gray">Estimated cost</div>
@@ -14,7 +14,7 @@
             <div v-if="button" class="centered">
                 <button 
                     @click="confirm" 
-                    class="button-primary br-32 scale-in gap-4 icon-btn icon-right confirm-btn"
+                    class="button-pri br-32 scale-in gap-4 icon-btn icon-right confirm-btn"
                     :class="{ 'button-disabled' : !allChecked }" 
                     :disabled="!allChecked ? true : false">
                     {{ user.address ? 'Continue' : 'Confirm availability' }}
@@ -55,6 +55,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.button-pri{
+    background-color: #0071E3;
+    color: white;
+}
 .total-wrapper{
     container-type: inline-size;
 }

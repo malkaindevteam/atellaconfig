@@ -50,7 +50,6 @@ export default {
           selectedExterior.filezname = 'Regular'
         }
         var filePath = `${selectedType.filezname}/${selectedColor.filezname}/${selectedExterior.filezname}/${selectedType.filezname}-${selectedColor.filezname}-${selectedExterior.filezname}-v1.glb`;
-        console.log(filePath);
         return filePath;
       }
 
@@ -70,7 +69,6 @@ export default {
   methods: {
     handleLinkClick(event) {
       event.preventDefault();
-      console.log('me')
     }
   }
 }

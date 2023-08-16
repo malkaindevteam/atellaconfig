@@ -7,7 +7,7 @@
                     <span class="gray">Feel free to change your mind. Reservations can be changed at any time</span>
                 </div>
             </div>
-            <form @submit.prevent="" class="flx column gap-16">
+            <form ref="form" @submit.prevent="sendEmail" class="flx column gap-16">
                 <div class="form-row grid grid-col-2 gap-24">
                     <div class="form-col">
                         <label for="first_name">First name</label>
@@ -34,8 +34,22 @@
                         <input v-model="form.phone" type="tel" name="phone_number" id="phone_number">
                     </div>
                 </div>
+                <div class="flx jc-sb">
+                    <button @click="goBack" class="button-outline br-32 btn-md icon-btn icon-left gap-4 scale-in">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
+                            <path d="M15.216,11.51a.919.919,0,0,1,.007,1.294l-4.268,4.282H22.218a.914.914,0,0,1,0,1.828H10.955L15.23,23.2a.925.925,0,0,1-.007,1.294.91.91,0,0,1-1.287-.007L8.142,18.647h0a1.026,1.026,0,0,1-.19-.288.872.872,0,0,1-.07-.352.916.916,0,0,1,.26-.64l5.794-5.836A.9.9,0,0,1,15.216,11.51Z" transform="translate(-7.882 -11.252)"/>
+                        </svg>
+                        Back
+                    </button>
+
+                    <button    type="submit" name="submit"  value="Continue " class="button-primary br-32 btn-md gap-4 icon-btn icon-right scale-in" :class="{ 'button-disabled' : !computedCheck}" :disabled="!computedCheck ? true : false" > Continue <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
+                        <path d="M15.791,11.51a.919.919,0,0,0-.007,1.294l4.268,4.282H8.789a.914.914,0,0,0,0,1.828H20.052L15.777,23.2a.925.925,0,0,0,.007,1.294.91.91,0,0,0,1.287-.007l5.794-5.836h0a1.026,1.026,0,0,0,.19-.288.872.872,0,0,0,.07-.352.916.916,0,0,0-.26-.64l-5.794-5.836A.9.9,0,0,0,15.791,11.51Z" transform="translate(-7.882 -11.252)" fill="#fff"/>
+                    </svg></button> 
+                </div>
+                
+                
             </form>
-            <div class="flx jc-sb">
+            <!-- <div class="flx jc-sb">
                 <button @click="goBack" class="button-outline br-32 btn-md icon-btn icon-left gap-4 scale-in">
                     <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
                         <path d="M15.216,11.51a.919.919,0,0,1,.007,1.294l-4.268,4.282H22.218a.914.914,0,0,1,0,1.828H10.955L15.23,23.2a.925.925,0,0,1-.007,1.294.91.91,0,0,1-1.287-.007L8.142,18.647h0a1.026,1.026,0,0,1-.19-.288.872.872,0,0,1-.07-.352.916.916,0,0,1,.26-.64l5.794-5.836A.9.9,0,0,1,15.216,11.51Z" transform="translate(-7.882 -11.252)"/>
@@ -48,7 +62,7 @@
                         <path d="M15.791,11.51a.919.919,0,0,0-.007,1.294l4.268,4.282H8.789a.914.914,0,0,0,0,1.828H20.052L15.777,23.2a.925.925,0,0,0,.007,1.294.91.91,0,0,0,1.287-.007l5.794-5.836h0a1.026,1.026,0,0,0,.19-.288.872.872,0,0,0,.07-.352.916.916,0,0,0-.26-.64l-5.794-5.836A.9.9,0,0,0,15.791,11.51Z" transform="translate(-7.882 -11.252)" fill="#fff"/>
                     </svg>
                 </button>
-            </div>
+            </div> -->
         </div>
         <div v-else class="flx column gap-40">
             <div class="br-16 centered gray-card">
@@ -75,6 +89,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import emailjs from 'emailjs-com';
 export default {
     name: 'ConfigurePayment',
     computed: {
@@ -106,6 +121,23 @@ export default {
         }
     },
     methods: {
+        sendEmail() {
+      
+      emailjs.sendForm('service_0xmhu92', 'template_erx83fq', this.$refs.form,
+      'ddM7tHGKfcBst_deC', {
+        fname: this.form.fname,
+        lname: this.form.fname,
+        email: this.form.email,
+        phone: this.phone
+      })
+      .then((result) => {
+          console.log('SUCCESS!', result.text);
+      }, (error) => {
+          console.log('FAILED...', error.text);
+      });
+   
+  },
+  
         setUser() {
             this.form.fname = this.user.fname
             this.form.lname = this.user.lname

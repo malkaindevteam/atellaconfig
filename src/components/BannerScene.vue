@@ -230,7 +230,7 @@ canvas {
     width: 100%;
 }
 .button-sec{
-  background-color: rgba(198, 189, 179, 0.19);
+  background-color: rgb(237 234 231) ;
   color: #000;
   position: absolute;
     left: 50%;

@@ -39,6 +39,7 @@ body{
 .button-primary {
     background-color: var(--primary-color);
     color: #ffffff;
+    cursor: pointer;
 }
 .button-secondary {
     background-color: #BB9B74;
@@ -162,6 +163,10 @@ button, .a-button {
 
 .flx {
     display: flex;
+}
+.flx-2 {
+    display: flex;
+    justify-content: end;
 }
 .column{
     flex-direction: column;

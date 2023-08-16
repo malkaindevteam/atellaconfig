@@ -40,6 +40,7 @@ export default new Vuex.Store({
     cost_modal: false,
     cost_modal2:false,
     hide_tab:false,
+    rental_modal:false,
     appointment_modal: false
   },
   mutations: {
@@ -81,23 +82,35 @@ export default new Vuex.Store({
     openCostModal(state) {
       state.cost_modal = true
       state.hide_tab=false;
+      state.rental_modal=false;
     },
     noTabModal(state) {
       state.cost_modal = true
       state.hide_tab=true;
+      state.rental_modal=false;
 
     },
     openInfoModal(state) {
       state.cost_modal2 = true
       state.hide_tab=false;
+      state.rental_modal=false;
+    },
+    openRentalModal(state) {
+     
+      state.rental_modal=true;
+    },
+    closeRentalModal(state){
+      state.rental_modal=false;
     },
     noInfoModal(state) {
       state.cost_modal2 = false
       state.hide_tab=false;
+      state.rental_modal=false;
 
     },
     closeCostModal(state) {
       state.cost_modal = false
+     
     },
     openAppointmentModal(state) {
       state.appointment_modal = true

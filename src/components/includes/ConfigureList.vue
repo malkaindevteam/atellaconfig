@@ -10,7 +10,7 @@
             <img class="new-img" :src="item.image"  alt="">
             <h4 class="capitalize" :class="{'mb-8' : !item.sub_title && item.price }">{{ item.name }}</h4>
             <div v-if="item.sub_title" class="mb-8 fs-09">{{ item.sub_title }}</div>
-            <span v-if="item.price" class="list-pill br-32">${{ computePrice(item.price) }}</span>
+            <span class="list-pill br-32">${{ computePrice(item.price) }}</span>
         </div>
     </div>
     
@@ -49,12 +49,14 @@ export default {
 .house-list{
     padding: 4px;
     border: 1px solid #fbfbfb;
+    border-radius: 20px;
     transition: 100ms all;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     container-type: inline-size;
     &:hover {
         border-color: #000;
+        border-radius: 20px;
     }
 }
 

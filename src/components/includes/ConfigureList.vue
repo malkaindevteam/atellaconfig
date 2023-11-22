@@ -10,7 +10,7 @@
             <img class="new-img" :src="item.image"  alt="">
             <h4 class="capitalize" :class="{'mb-8' : !item.sub_title && item.price }">{{ item.name }}</h4>
             <div v-if="item.sub_title" class="mb-8 fs-09">{{ item.sub_title }}</div>
-            <span class="list-pill br-32">${{ computePrice(item.price) }}</span>
+            <span v-if="item.price >=0" class="list-pill br-32">${{ computePrice(item.price) }}</span>
         </div>
     </div>
     
@@ -65,6 +65,7 @@ export default {
     padding: 10px;
     border-radius: 20px;
     border: 1px solid #F0F0F0;
+    
 }
 
 .new-img{

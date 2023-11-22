@@ -3,24 +3,32 @@
         <div class="total-card br-16 bg-white flx jc-sb gap-24">
             <div class="flx column">
                 <div class="flx gap-8 ai-c">
-                    <div class="fs-105rem">${{ computePrice(computedTotal+installation) }}</div>
+                    <div class="fs-105rem">${{ computePrice(computedTotal + installation) }}</div>
                     <div v-if="!computedTotal == 0" class="flx gap-8">
                         <span class="gray">or</span>
-                        <div  @click="$store.commit('noTabModal');" class="blue-2">${{ computePrice((computedTotal+installation)/12) }}/Mo +</div>
+                        <div @click="$store.commit('noTabModal');" class="blue-2">
+
+                            ${{
+                                computePrice(Math.round(
+                                    calculateMonthlyPayment(
+                                        7.5,
+                                        360,
+                                        (computedTotal + installation) - ( (computedTotal + installation) * (30 / 100))
+                                    )
+                                ))
+                            }}
+                            /mo +</div>
                     </div>
                 </div>
                 <div class="gray">Estimated cost</div>
             </div>
             <div v-if="button" class="centered">
-                <button 
-                    @click="confirm" 
-                    class="button-pri br-32 scale-in gap-4 icon-btn icon-right confirm-btn"
-                    :class="{ 'button-disabled' : !allChecked }" 
-                    :disabled="!allChecked ? true : false">
+                <button @click="confirm" class="button-pri br-32 scale-in gap-4 icon-btn icon-right confirm-btn"
+                    :class="{ 'button-disabled': !allChecked }" :disabled="!allChecked ? true : false">
                     {{ user.address ? 'Continue' : 'Confirm availability' }}
-                    <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
                         <path d="M15.791,11.51a.919.919,0,0,0-.007,1.294l4.268,4.282H8.789a.914.914,0,0,0,0,1.828H20.052L15.777,23.2a.925.925,0,0,0,.007,1.294.91.91,0,0,0,1.287-.007l5.794-5.836h0a1.026,1.026,0,0,0,.19-.288.872.872,0,0,0,.07-.352.916.916,0,0,0-.26-.64l-5.794-5.836A.9.9,0,0,0,15.791,11.51Z" transform="translate(-7.882 -11.252)" fill="#fff"/>
-                    </svg>
+                    </svg> -->
                 </button>
             </div>
         </div>
@@ -40,35 +48,50 @@ export default {
         }),
         allChecked() {
             const config = this.configuration
-            if(config.type.name && config.color.name && config.exterior.name && config.blind.name )
-            return true
+            if (config.type.name && config.color.name && config.blind.name)
+                return true
             else
-            return false
+                return false
         }
     },
     methods: {
         confirm() {
-            this.$router.push({ name: 'ConfigureAddress'})
-        }
+            this.$router.push({ name: 'ConfigureAddress' })
+        },
+        calculateMonthlyPayment(interestRate, numberOfPayments, loanAmount) {
+
+            const monthlyInterestRate = interestRate / 100 / 12;
+
+            let a = (1 + monthlyInterestRate) ** numberOfPayments;
+            let b = a - 1;
+            let c = (monthlyInterestRate * a) / b;
+            let d = loanAmount * c;
+            return d;
+
+        },
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.button-pri{
+.button-pri {
     background-color: #0071E3;
     color: white;
 }
-.total-wrapper{
+
+.total-wrapper {
     container-type: inline-size;
 }
-@container(inline-size <= 500px) {
+
+@container(inline-size <=500px) {
     .total-card {
         flex-direction: column
     }
+
     .centered {
         place-items: stretch
     }
+
     .br-16 {
         border-radius: 9px;
     }

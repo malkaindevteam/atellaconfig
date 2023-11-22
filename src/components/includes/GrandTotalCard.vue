@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="mb-8 fs-101rem">Price breakdown</div>
         <div class="flx column gap-24">
-            <div class="flx gap-24 ai-c">
+            <!--<div class="flx gap-24 ai-c">
                 <div class="flx-grow-1 br-16 centered gray-card">
                     <div>
                         <div class="fs-105rem">${{ computePrice(computedTotal) }}</div>
@@ -22,11 +22,11 @@
                         <span class="gray">Base installation cost</span>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="flx-grow-1 br-16 centered gray-card">
                 <div>
                     <div class="fs-105rem">${{ computePrice(deposit) }} deposit</div>
-                    <span class="gray">Feel free to change your mind. Reservations are fully refundable</span>
+                    <span class="gray">Feel free to change your mind. Reservations are fully refundable.</span>
                 </div>
             </div>
         </div>

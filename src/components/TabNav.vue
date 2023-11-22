@@ -43,21 +43,21 @@ export default {
       cost_modal2: (state) => state.cost_modal2,
     }),
   },
-  mounted() {
-    if (this.selected == "Rental Property") {
-      this.$store.commit("closeCostModal");
-      this.$store.commit("openRentalModal");
-    }
-  },
+  // mounted() {
+  //   if (this.selected == "Rental Property") {
+  //     this.$store.commit("closeCostModal");
+  //     this.$store.commit("openRentalModal");
+  //   }
+  // },
 
-  watch: {
-    selected(r) {
-      if (r == "Rental Property") {
-        this.$store.commit("closeCostModal");
-        this.$store.commit("openRentalModal");
-      }
-    },
-  },
+  // watch: {
+  //   selected(r) {
+  //     if (r == "Rental Property") {
+  //       this.$store.commit("closeCostModal");
+  //       this.$store.commit("openRentalModal");
+  //     }
+  //   },
+  // },
   methods: {
     setTab(tab) {
       this.$emit("selected", tab);

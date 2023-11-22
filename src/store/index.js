@@ -9,39 +9,42 @@ export default new Vuex.Store({
     zoom: 20,
     configuration: { 
         type: {
-          id: 1, name: 'Atella studio',mymy: 'Studio', sub_title: '455 Gross sq. fe.', price: 125000, image: require('@/assets/images/houses/atella_type_studio.png'), rotation: 100 
+          id: 1, name: 'Atella Studio',mymy: 'Studio', sub_title: '266 Gross sq. ft.', price: 185000, image: require('@/assets/images/houses/atella_type_studio.png'), rotation: 100 
         },
         color: {},
-        exterior: {},
+        exterior: {
+          id: 1, name: 'Standard', filezname: 'Regular', price: 0, image: require('@/assets/images/houses/appliance_standard.png'), rotation: 150
+        },
         blind: {},
     },
-    installation: 10000,
+    installation: 0,
     deposit: 1000,
     user: { address: '', info: {}},
     configTab: { page: '', title: '', sub_title: ''},
     types: [
-      {id: 1, name: 'Atella studio', filezname: 'Studio', sub_title: '455 Gross sq. fe.', price: 125000, image: require('@/assets/images/houses/atella_type_studio.png'), rotation: 180 },
-      {id: 2, name: 'Atella one', filezname: 'OneBed', sub_title: '455 Gross sq. fe.', price: 150000, image: require('@/assets/images/houses/atella_type_one.png'), rotation: 360}
+      {id: 1, name: 'Atella Studio', filezname: 'Studio', sub_title: '266 Gross sq. ft.', price: 185000, image: require('@/assets/images/houses/atella_type_studio.png'), rotation: 180 },
+      {id: 2, name: 'Atella One', filezname: 'OneBed', sub_title: '373 Gross sq. ft.', price: 195000, image: require('@/assets/images/houses/atella_type_one.png'), rotation: 360}
     ],
     colors: [
-      {id: 1, name: 'light', fileznameme: 'Light', image: require('@/assets/images/houses/color_light.png'), rotation: 150},
-      {id: 2, name: 'dark', filezname: 'Dark', image: require('@/assets/images/houses/color_dark.png'), rotation: 150},
-      {id: 3, name: 'neutral', filezname: 'Neutral', image: require('@/assets/images/houses/color_neutral.png'), rotation: 150}
+      {id: 1, name: 'Light', fileznameme: 'Light', image: require('@/assets/images/houses/color_light.png'), rotation: 150},
+      {id: 2, name: 'Dark', filezname: 'Dark', image: require('@/assets/images/houses/color_dark.png'), rotation: 150},
+      {id: 3, name: 'Neutral', filezname: 'Neutral', image: require('@/assets/images/houses/color_neutral.png'), rotation: 150}
     ],
     exterior_decks: [
       {id: 1, name: 'Standard', filezname: 'Regular', price: 0, image: require('@/assets/images/houses/appliance_standard.png'), rotation: 150},
-      {id: 2, name: 'Extra wide', filezname: 'Extended', price: 2500, image: require('@/assets/images/houses/appliance_extended.png'), rotation: 150}
+      {id: 2, name: 'Extra Wide', filezname: 'Extended', price: 2500, image: require('@/assets/images/houses/appliance_extended.png'), rotation: 150}
     ],
     
     blinds: [
-      {id: 1, name: 'No blinds', filezname: 'noblinds', price: 0, image: require('@/assets/images/houses/no_blinds.png'), rotation: 150},
-      {id: 2, name: 'Roller blinds', filezname: 'rollerblinds', price: 2500, image: require('@/assets/images/houses/roller_blinds.png'), rotation: 150}
+      {id: 1, name: 'No Blinds', filezname: 'noblinds', price: 0, image: require('@/assets/images/houses/no_blinds.png'), rotation: 150},
+      {id: 2, name: 'Roller Blinds', filezname: 'rollerblinds', price: 2500, image: require('@/assets/images/houses/roller_blinds.png'), rotation: 150}
     ],
     cost_modal: false,
     cost_modal2:false,
     hide_tab:false,
     rental_modal:false,
-    appointment_modal: false
+    appointment_modal: false,
+    run_cal:false
   },
   mutations: {
     setSelected(state, payload) {
@@ -83,17 +86,21 @@ export default new Vuex.Store({
       state.cost_modal = true
       state.hide_tab=false;
       state.rental_modal=false;
+      state.run_cal= true;
     },
     noTabModal(state) {
       state.cost_modal = true
       state.hide_tab=true;
       state.rental_modal=false;
+      state.run_cal= true;
+   
 
     },
     openInfoModal(state) {
       state.cost_modal2 = true
       state.hide_tab=false;
       state.rental_modal=false;
+     
     },
     openRentalModal(state) {
      
@@ -106,11 +113,11 @@ export default new Vuex.Store({
       state.cost_modal2 = false
       state.hide_tab=false;
       state.rental_modal=false;
-
+      state.run_cal= false;
     },
     closeCostModal(state) {
       state.cost_modal = false
-     
+      state.run_cal= false;
     },
     openAppointmentModal(state) {
       state.appointment_modal = true

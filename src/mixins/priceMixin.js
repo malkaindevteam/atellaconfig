@@ -17,8 +17,8 @@ export default {
     },
     methods: {
         computePrice(price) {
-     console.log(price==0)
-            return price === 0? Intl.NumberFormat('en-US').format(price) :Intl.NumberFormat('en-US').format(price.toFixed(2))
+
+            return price === 0? Intl.NumberFormat('en-US').format(price) :Intl.NumberFormat('en-US').format(price)
         }
     }
 }

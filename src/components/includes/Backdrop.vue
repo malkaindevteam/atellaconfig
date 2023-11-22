@@ -1,7 +1,9 @@
 <template>
-    <div id="overlay"></div>
+    <div id="overlay"  @click="handleClick"  ></div>
 </template>
+
 <script>
+
 export default {
     name: 'BackdropOverlay',
     props: ['index', 'opacity'],
@@ -12,7 +14,20 @@ export default {
         computedOpacity() {
             return this.opacity
         }
+    },
+    methods: {
+    handleClick() {
+      this.firstClickFunction();
+      this.secondClickFunction();
+    },
+    firstClickFunction() {
+        this.$store.commit('closeCostModal')
+    },
+    secondClickFunction() {
+        this.$store.commit('noInfoModal')
     }
+  }
+   
 }
 </script>
 <style lang="scss" scoped>
@@ -27,5 +42,6 @@ export default {
     z-index: v-bind(computedIndex);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
 }
 </style>

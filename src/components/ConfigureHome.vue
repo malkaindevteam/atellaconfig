@@ -2,18 +2,18 @@
     <div class="wrapper">
         <div class="flx column gap-40">
             <div>
-                <div class="fs-103rem mb-16">Select your Atella type</div>
+                <!-- <div class="fs-103rem mb-16">Select your Atella type</div> -->
                 <div class="flx flx-wrap gap-24">
                     <configure-list v-for="item in types" :key="item.id" :item="item" :name="'type'" />
                 </div>
             </div>
             <div>
                 <div class="fs-103rem mb-16">Choose your base color</div>
-                <div class="flx flx-wrap gap-24">
+                <div class="flx10  gap-24">
                     <configure-list v-for="item in colors" :key="item.id" :item="item" :name="'color'" />
                 </div>
             </div>
-            <div>
+            <div style="display: none;">
                 <div class="fs-103rem mb-16">Choose your exterior deck</div>
                 <div class="flx flx-wrap gap-24">
                     <configure-list v-for="item in exterior_decks" :key="item.id" :item="item" :name="'exterior'" />
@@ -56,7 +56,7 @@ export default {
     data() {
         return {
             selectedConfig: '',
-            cost: 10000,
+            cost: 0,
             selections: [],
         }
     },
@@ -72,7 +72,7 @@ export default {
             }
         },
         setPage() {
-            const data = { page: 1, title: 'Configure your atella', sub_title: 'Design the perfect atella for your backyard.'}
+            const data = { page: 1, title: 'Configure your Atella', sub_title: 'Design the perfect Atella for your backyard.'}
             this.$store.commit('setConfigTab', data)
         }
     },
@@ -86,6 +86,11 @@ export default {
 .wrapper {
     container-type: inline-size;
 }
+.flx10{
+    display: flex;
+  
+}
+
 @container(inline-size <= 500px) {
     .gap-24 {
         gap: 8px
@@ -93,5 +98,15 @@ export default {
     .grand-total {
         gap: 14px
     }
+
+    .flx10{
+        display: grid;
+      grid-template-columns: 1fr 1fr ; /* Two equal-width columns */
+     
+
+     
+    }
+
+   
 }
 </style>

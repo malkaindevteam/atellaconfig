@@ -5,7 +5,7 @@
             <div class="flx ai-c jc-sb br-16 bg-white card-with-border">
                 <div>
                     <div class="mb-4 fs-103rem">{{ configuration.type.name }}</div>
-                    <div class="gray">{{ configuration.type.sub_title }}</div>
+                    <div class="gray">{{ configuration.type.sub_title }} </div>
                 </div>
                 <div>
                     <router-link :to="{ name: 'ConfigureHome'}" class="gap-4 a-button edit scale-in">
@@ -19,15 +19,19 @@
             <div class="grid grid-col-2 gap-16 config-summary">
                 <div class="col">
                     <div class="col-row mb-16">
+                        <label for="color">Color</label>
+                        <div id="color" class="flx ai-c gap-8 capitalize"><i class="br-50" :class="configuration.color.name "></i>{{ configuration.color.name }}</div>
+                    </div>
+
+                    <div class="col-row mb-16">
                         <label for="exterior">Exterior deck</label>
-                        <div id="exterior" class="flx ai-c gap-8 capitalize"><i class="br-50" :class="configuration.color.name "></i>{{ configuration.color.name }}</div>
+                        <div id="exterior" class="flx ai-c gap-8 capitalize"><i class="br-50" :class="configuration.exterior.name "></i>{{ configuration.exterior.name }}</div>
                     </div>
                     
                 </div>
                 <div class="col">
                     <div class="col-row">
-                        <label for="exterior">Entry & Blinds</label>
-                        <div id="blind">{{ configuration.exterior.name }}</div>
+                        <label for="exterior"> Blinds</label>
                         <div>{{ configuration.blind.name }}</div>
                     </div>
                 </div>
@@ -52,16 +56,16 @@
             </div>
             <div class="flx jc-sb">
                 <button @click="toggle" class="button-outline br-32 icon-btn gap-4 btn-md icon-left scale-in">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
                         <path d="M15.216,11.51a.919.919,0,0,1,.007,1.294l-4.268,4.282H22.218a.914.914,0,0,1,0,1.828H10.955L15.23,23.2a.925.925,0,0,1-.007,1.294.91.91,0,0,1-1.287-.007L8.142,18.647h0a1.026,1.026,0,0,1-.19-.288.872.872,0,0,1-.07-.352.916.916,0,0,1,.26-.64l5.794-5.836A.9.9,0,0,1,15.216,11.51Z" transform="translate(-7.882 -11.252)"/>
-                    </svg>
+                    </svg> -->
                     Back
                 </button>
                 <button @click="nextPage" class="button-primary br-32 btn-md gap-4 icon-btn icon-right scale-in">
                     Continue
-                    <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" height="13.501" viewBox="0 0 15.243 13.501">
                         <path d="M15.791,11.51a.919.919,0,0,0-.007,1.294l4.268,4.282H8.789a.914.914,0,0,0,0,1.828H20.052L15.777,23.2a.925.925,0,0,0,.007,1.294.91.91,0,0,0,1.287-.007l5.794-5.836h0a1.026,1.026,0,0,0,.19-.288.872.872,0,0,0,.07-.352.916.916,0,0,0-.26-.64l-5.794-5.836A.9.9,0,0,0,15.791,11.51Z" transform="translate(-7.882 -11.252)" fill="#fff"/>
-                    </svg>
+                    </svg> -->
                 </button>
             </div>
         </div>
@@ -99,11 +103,11 @@ export default {
             }
         },
         setPage() {
-            const data = { page: 2, title: 'Where are we installing your atella?', sub_title: 'Share your street address to verify availability and refine your installation estimate.'}
+            const data = { page: 2, title: 'Where are we installing your Atella?'}
             this.$store.commit('setConfigTab', data)
         },
         setSummary(payload) {
-            const data = { page: 2, title: 'Your configuration summary', sub_title: 'Review and confirm your selection, then continue to keep your reservation.'}
+            const data = { page: 2, title: 'Your configuration summary', sub_title: ''}
             payload ? this.$store.commit('setConfigTab', data) : this.setPage()
         },
         toggle(address) {
@@ -127,7 +131,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.button-primary {
+    background-color: #0071E3;
+    color: white;
+}
 
 .card-with-border {
     border: 1px solid #F0F0F0;

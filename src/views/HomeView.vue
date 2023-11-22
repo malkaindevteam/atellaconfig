@@ -57,7 +57,7 @@ export default {
     computedZoom() {
       let zoom = 20
       if (this.configTab.page !== 1) {
-        zoom = 40
+        zoom = 20
       }
       return zoom
     }
@@ -69,6 +69,7 @@ export default {
   methods: {
     handleLinkClick(event) {
       event.preventDefault();
+
     }
   }
 }
